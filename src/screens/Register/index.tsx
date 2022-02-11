@@ -11,8 +11,15 @@ import {
 import {RootStackParamList} from '../../App';
 import GlobalButton from '../../components/GlobalButton';
 import GlobalTextInput from '../../components/TextInput';
+import {doCreateUser} from '../../services/loginAPI';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Register'>;
+
+interface UserProps {
+  name: string;
+  email: string;
+  password: string;
+}
 
 const height = Dimensions.get('window').height;
 
@@ -22,6 +29,18 @@ const Register = ({navigation}: Props) => {
   const [email, setEmail] = React.useState('');
   const [nome, setNome] = React.useState('');
   const [senha, setSenha] = React.useState('');
+  const [user, setUser] = React.useState<UserProps>();
+
+  React.useEffect(() => {
+    if (email && nome && senha) {
+      const newUser = {
+        name: nome,
+        email,
+        password: senha,
+      };
+      setUser(newUser);
+    }
+  }, [email, nome, senha]);
 
   return (
     <View style={styles.mainContainer}>
@@ -32,13 +51,6 @@ const Register = ({navigation}: Props) => {
           style={styles.image}
         />
       </View>
-      {/* TODO: INPUT GLOBAL */}
-      {/* <Image
-        source={require('../../assets/images/user-picture.png')}
-        style={styles.userPic}
-        resizeMode={'cover'}
-      /> */}
-
       <View style={styles.textInputContainer}>
         <GlobalTextInput
           placeholder="Digite seu nome"
@@ -60,7 +72,10 @@ const Register = ({navigation}: Props) => {
             title="Finalizar Cadastro"
             color="#FFF"
             colorText="#0050F0"
-            onTouch={() => navigation.navigate('Login')}
+            onTouch={() => {
+              doCreateUser(user);
+              navigation.navigate('Login');
+            }}
           />
         </View>
         <Text style={styles.defaultText}>

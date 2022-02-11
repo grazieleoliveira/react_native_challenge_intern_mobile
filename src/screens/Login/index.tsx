@@ -1,27 +1,45 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   Dimensions,
   Image,
-  Pressable,
   StatusBar,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
-import {RootStackParamList} from '../../App';
+import reactotron from 'reactotron-react-native';
+import {AppContext, RootStackParamList} from '../../App';
 import GlobalButton from '../../components/GlobalButton';
 import GlobalTextInput from '../../components/TextInput';
+import {doLogin} from '../../services/loginAPI';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
 const height = Dimensions.get('window').height;
+
+interface UserLoginProps {
+  email: string;
+  password: string;
+}
 
 const Login = ({navigation}: Props) => {
   // TODO
   // Melhoria:  Talvez usar useReducer() ?
   const [email, setEmail] = React.useState('');
   const [senha, setSenha] = React.useState('');
+  const [user, setUser] = React.useState<UserLoginProps>();
+  const myContext = useContext(AppContext);
+
+  React.useEffect(() => {
+    if (email && senha) {
+      const newUser = {
+        email,
+        password: senha,
+      };
+      setUser(newUser);
+    }
+  }, [email, senha]);
 
   return (
     <View style={styles.mainContainer}>
@@ -50,11 +68,17 @@ const Login = ({navigation}: Props) => {
           onChangeText={setSenha}
         />
         <View style={styles.buttonContainer}>
+          {/* TODO: Substituir titulo por ActivityIndicator quando o request ta carregando */}
           <GlobalButton
             title="Entrar"
             color="#FFF"
             colorText="#0050F0"
-            onTouch={() => navigation.navigate('Login')}
+            onTouch={async () => {
+              const res = await doLogin(user);
+              if (res === 'OK') {
+                navigation.navigate('Home');
+              }
+            }}
           />
         </View>
         <Text style={styles.defaultText}>
