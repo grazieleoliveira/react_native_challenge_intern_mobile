@@ -1,15 +1,32 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
-import {Image, StatusBar, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {RootStackParamList} from '../../App';
 import GlobalButton from '../../components/GlobalButton';
 import SanarLogo from '../../components/SanarLogo';
+import GlobalTextInput from '../../components/TextInput';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Register'>;
 
 const Register = ({navigation}: Props) => {
+  // TODO
+  // Melhoria:  Talvez usar useReducer() ?
+  const [email, setEmail] = React.useState('');
+  const [nome, setNome] = React.useState('');
+  const [senha, setSenha] = React.useState('');
+
   return (
-    <View style={styles.mainContainer}>
+    <KeyboardAvoidingView
+      style={styles.mainContainer}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <StatusBar barStyle="light-content" backgroundColor="#0050F0" />
       <View style={styles.imageContainer}>
         <Image
@@ -23,6 +40,24 @@ const Register = ({navigation}: Props) => {
         style={styles.userPic}
         resizeMode={'cover'}
       /> */}
+
+      <View style={styles.textInputContainer}>
+        <GlobalTextInput
+          placeholder="Digite seu nome"
+          text={nome}
+          onChangeText={setNome}
+        />
+        <GlobalTextInput
+          placeholder="Digite seu e-mail"
+          text={email}
+          onChangeText={setEmail}
+        />
+        <GlobalTextInput
+          placeholder="Digite sua senha"
+          text={senha}
+          onChangeText={setSenha}
+        />
+      </View>
       <View style={styles.buttonContainer}>
         <GlobalButton
           title="Finalizar Cadastro"
@@ -35,7 +70,7 @@ const Register = ({navigation}: Props) => {
         Ao clicar em <Text style={styles.boldText}>"Finalizar cadastro"</Text>{' '}
         você estará aceitando também nossos termos e condições
       </Text>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -46,7 +81,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   imageContainer: {
-    padding: 40,
+    paddingTop: 40,
   },
   image: {
     width: 152,
@@ -59,16 +94,29 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderRadius: 75,
   },
+  textInputContainer: {
+    width: '100%',
+    paddingHorizontal: 24,
+    flex: 0.5,
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    paddingTop: 32,
+  },
   buttonContainer: {
+    position: 'absolute',
+    bottom: 150,
     width: '100%',
     paddingHorizontal: 24,
   },
   defaultText: {
+    position: 'absolute',
+    bottom: 100,
     color: '#FFF',
     fontFamily: 'RedHatDisplay-Regular',
     fontSize: 14,
     lineHeight: 20,
     textAlign: 'center',
+    paddingHorizontal: 32,
   },
   boldText: {
     color: '#FFF',
