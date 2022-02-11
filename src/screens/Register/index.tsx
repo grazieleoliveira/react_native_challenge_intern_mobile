@@ -1,9 +1,8 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
 import {
+  Dimensions,
   Image,
-  KeyboardAvoidingView,
-  Platform,
   StatusBar,
   StyleSheet,
   Text,
@@ -11,10 +10,11 @@ import {
 } from 'react-native';
 import {RootStackParamList} from '../../App';
 import GlobalButton from '../../components/GlobalButton';
-import SanarLogo from '../../components/SanarLogo';
 import GlobalTextInput from '../../components/TextInput';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Register'>;
+
+const height = Dimensions.get('window').height;
 
 const Register = ({navigation}: Props) => {
   // TODO
@@ -24,9 +24,7 @@ const Register = ({navigation}: Props) => {
   const [senha, setSenha] = React.useState('');
 
   return (
-    <KeyboardAvoidingView
-      style={styles.mainContainer}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+    <View style={styles.mainContainer}>
       <StatusBar barStyle="light-content" backgroundColor="#0050F0" />
       <View style={styles.imageContainer}>
         <Image
@@ -57,20 +55,20 @@ const Register = ({navigation}: Props) => {
           text={senha}
           onChangeText={setSenha}
         />
+        <View style={styles.buttonContainer}>
+          <GlobalButton
+            title="Finalizar Cadastro"
+            color="#FFF"
+            colorText="#0050F0"
+            onTouch={() => navigation.navigate('Login')}
+          />
+        </View>
+        <Text style={styles.defaultText}>
+          Ao clicar em <Text style={styles.boldText}>"Finalizar cadastro"</Text>{' '}
+          você estará aceitando também nossos termos e condições
+        </Text>
       </View>
-      <View style={styles.buttonContainer}>
-        <GlobalButton
-          title="Finalizar Cadastro"
-          color="#FFF"
-          colorText="#0050F0"
-          onTouch={() => {}}
-        />
-      </View>
-      <Text style={styles.defaultText}>
-        Ao clicar em <Text style={styles.boldText}>"Finalizar cadastro"</Text>{' '}
-        você estará aceitando também nossos termos e condições
-      </Text>
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 
@@ -81,7 +79,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   imageContainer: {
-    paddingTop: 40,
+    padding: 40,
   },
   image: {
     width: 152,
@@ -97,26 +95,20 @@ const styles = StyleSheet.create({
   textInputContainer: {
     width: '100%',
     paddingHorizontal: 24,
-    flex: 0.5,
+    height: height / 1.9,
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    paddingTop: 32,
   },
   buttonContainer: {
-    position: 'absolute',
-    bottom: 150,
     width: '100%',
-    paddingHorizontal: 24,
+    paddingTop: 20,
   },
   defaultText: {
-    position: 'absolute',
-    bottom: 100,
     color: '#FFF',
     fontFamily: 'RedHatDisplay-Regular',
     fontSize: 14,
     lineHeight: 20,
     textAlign: 'center',
-    paddingHorizontal: 32,
   },
   boldText: {
     color: '#FFF',
