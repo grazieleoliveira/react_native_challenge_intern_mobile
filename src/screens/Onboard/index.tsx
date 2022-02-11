@@ -8,10 +8,13 @@ import {
   View,
 } from 'react-native';
 import GlobalButton from '../../components/GlobalButton';
-
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import SanarLogo from '../../components/SanarLogo';
+import {RootStackParamList} from '../../App';
 
-const Onboard = () => {
+type Props = NativeStackScreenProps<RootStackParamList, 'Onboard'>;
+
+const Onboard = ({navigation}: Props) => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <StatusBar barStyle="dark-content" backgroundColor="#FFF" />
@@ -31,13 +34,12 @@ const Onboard = () => {
         resizeMode="contain"
         style={styles.desenhoImage}
       />
-      {/* TODO: Buttonn global component */}
       <View style={styles.buttonContainer}>
         <GlobalButton
           title="Começar Agora"
           color="#0050F0"
           colorText="#FFF"
-          onTouch={() => {}}
+          onTouch={() => navigation.navigate('Register')}
         />
       </View>
     </SafeAreaView>

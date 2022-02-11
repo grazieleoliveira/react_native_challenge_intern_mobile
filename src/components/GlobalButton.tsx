@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   text: {
     padding: 16,
     fontSize: 16,
-    fontFamily: 'Roboto-Medium',
+    fontFamily: 'Roboto-Bold',
   },
 });
 
