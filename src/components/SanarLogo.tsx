@@ -5,7 +5,7 @@ class SanarLogo extends Component {
   render() {
     return (
       <Image
-        source={require('./logo-sanar.png')}
+        source={require('../assets/logo-sanar.png')}
         style={{width: 152, height: 45}}
       />
     );
