@@ -39,7 +39,7 @@ const Onboard = ({navigation}: Props) => {
           title="Começar Agora"
           color="#0050F0"
           colorText="#FFF"
-          onTouch={() => navigation.navigate('Register')}
+          onTouch={() => navigation.navigate('Login')}
         />
       </View>
     </SafeAreaView>
