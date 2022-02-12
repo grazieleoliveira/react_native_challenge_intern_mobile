@@ -1,7 +1,7 @@
 import {yupResolver} from '@hookform/resolvers/yup';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
-import {FieldValues, SubmitHandler, useForm} from 'react-hook-form';
+import {Controller, FieldValues, SubmitHandler, useForm} from 'react-hook-form';
 import {
   Dimensions,
   Image,
@@ -22,17 +22,17 @@ const height = Dimensions.get('window').height;
 
 const Register = ({navigation}: Props) => {
   const {
-    register,
-    setValue,
     handleSubmit,
     formState: {errors},
-  } = useForm({resolver: yupResolver(yupRegisterValidationSchema)});
-
-  React.useEffect(() => {
-    register('nome');
-    register('email');
-    register('password');
-  }, [register]);
+    control,
+  } = useForm({
+    defaultValues: {
+      nome: '',
+      email: '',
+      password: '',
+    },
+    resolver: yupResolver(yupRegisterValidationSchema),
+  });
 
   const registerUser: SubmitHandler<FieldValues> = async data => {
     const newUser = {
@@ -57,17 +57,39 @@ const Register = ({navigation}: Props) => {
         />
       </View>
       <View style={styles.textInputContainer}>
-        <GlobalTextInput
-          placeholder="Digite seu nome"
-          onChangeText={text => setValue('nome', text)}
+        <Controller
+          control={control}
+          name="nome"
+          render={({field: {onChange, value}}) => (
+            <GlobalTextInput
+              placeholder="Digite seu nome"
+              onChangeText={onChange}
+              value={value}
+            />
+          )}
         />
-        <GlobalTextInput
-          placeholder="Digite seu e-mail"
-          onChangeText={text => setValue('email', text)}
+        <Controller
+          control={control}
+          name="email"
+          render={({field: {onChange, value}}) => (
+            <GlobalTextInput
+              placeholder="Digite seu e-mail"
+              onChangeText={onChange}
+              value={value}
+            />
+          )}
         />
-        <GlobalTextInput
-          placeholder="Digite sua senha"
-          onChangeText={text => setValue('password', text)}
+        <Controller
+          control={control}
+          render={({field: {onChange, value}}) => (
+            <GlobalTextInput
+              placeholder="Digite sua senha"
+              onChangeText={onChange}
+              isPassword={true}
+              value={value}
+            />
+          )}
+          name="password"
         />
         <View style={styles.errorContainer}>
           {errors.password?.type === 'required' ||

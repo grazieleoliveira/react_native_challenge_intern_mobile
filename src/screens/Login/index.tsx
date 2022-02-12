@@ -8,7 +8,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import {FieldValues, SubmitHandler, useForm} from 'react-hook-form';
+import {Controller, FieldValues, SubmitHandler, useForm} from 'react-hook-form';
 import {RootStackParamList} from '../../App';
 import GlobalButton from '../../components/GlobalButton';
 import GlobalTextInput from '../../components/TextInput';
@@ -25,11 +25,17 @@ const Login = ({navigation}: Props) => {
   const [errorForbidden, setErrorForbidden] = useState(false);
 
   const {
-    register,
-    setValue,
     handleSubmit,
     formState: {errors},
-  } = useForm({resolver: yupResolver(yupLoginValidationSchema)});
+    control,
+    reset,
+  } = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+    resolver: yupResolver(yupLoginValidationSchema),
+  });
 
   const auth = useAuth();
 
@@ -49,11 +55,6 @@ const Login = ({navigation}: Props) => {
     }
   };
 
-  React.useEffect(() => {
-    register('email');
-    register('password');
-  }, [register]);
-
   return (
     <View style={styles.mainContainer}>
       <StatusBar barStyle="light-content" backgroundColor="#0050F0" />
@@ -70,13 +71,28 @@ const Login = ({navigation}: Props) => {
       />
 
       <View style={styles.textInputContainer}>
-        <GlobalTextInput
-          placeholder="Digite seu e-mail"
-          onChangeText={text => setValue('email', text)}
+        <Controller
+          control={control}
+          name="email"
+          render={({field: {onChange, value}}) => (
+            <GlobalTextInput
+              placeholder="Digite seu e-mail"
+              onChangeText={onChange}
+              value={value}
+            />
+          )}
         />
-        <GlobalTextInput
-          placeholder="Digite sua senha"
-          onChangeText={text => setValue('password', text)}
+        <Controller
+          control={control}
+          render={({field: {onChange, value}}) => (
+            <GlobalTextInput
+              placeholder="Digite sua senha"
+              onChangeText={onChange}
+              isPassword={true}
+              value={value}
+            />
+          )}
+          name="password"
         />
         <View style={styles.errorContainer}>
           {errors.password?.type === 'required' ||
@@ -105,7 +121,6 @@ const Login = ({navigation}: Props) => {
           )}
         </View>
         <View style={styles.buttonContainer}>
-          {/* TODO: Substituir titulo por ActivityIndicator quando o request ta carregando */}
           <GlobalButton
             title="Entrar"
             color="#FFF"
@@ -116,7 +131,13 @@ const Login = ({navigation}: Props) => {
         <Text style={styles.defaultText}>
           Não possui um acesso?
           <Text
-            onPress={() => navigation.navigate('Register')}
+            onPress={() => {
+              navigation.navigate('Register');
+              reset({
+                email: '',
+                password: '',
+              });
+            }}
             style={styles.boldText}>
             {' '}
             Cadastre-se aqui
