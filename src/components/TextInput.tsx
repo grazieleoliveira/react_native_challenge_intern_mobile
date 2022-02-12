@@ -23,7 +23,6 @@ const GlobalTextInput = ({
   return (
     <TextInput
       style={styles.textInput}
-      value={text}
       onChangeText={onChangeText}
       keyboardType={keyboardType}
       placeholder={placeholder}

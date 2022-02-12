@@ -43,6 +43,9 @@ export const doCreateUser = (user: any) =>
 const saveLoggedUser = (user: any) =>
   AsyncStorage.setItem(LOGGED_USER_KEY, user);
 
+export const removeLoggedUser = () =>
+  AsyncStorage.removeItem(LOGGED_USER_KEY);
+
 export const doLogin = (user: any) =>
   new Promise(async resolve => {
     const savedUsers = await readUser();
@@ -64,24 +67,4 @@ export const doLogin = (user: any) =>
     }
   });
 
-interface loadStorageDataProps {
-  setData: Dispatch<SetStateAction<AuthDataProps>>;
-  onSuccess: Dispatch<SetStateAction<boolean>>;
-}
-export const loadStorageData = async ({
-  setData,
-  onSuccess,
-}: loadStorageDataProps) => {
-  try {
-    //Try get the data from Async Storage
-    const authDataSerialized = await AsyncStorage.getItem('logged_key');
-    if (authDataSerialized) {
-      //If there are data, it's converted to an Object and the state is updated.
-      const _authData = JSON.parse(authDataSerialized);
-      setData(_authData);
-    }
-  } catch (error) {
-  } finally {
-    onSuccess(false);
-  }
-};
+

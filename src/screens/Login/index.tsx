@@ -9,27 +9,37 @@ import {
   View,
 } from 'react-native';
 import reactotron from 'reactotron-react-native';
-import {AppContext, RootStackParamList} from '../../App';
+import {useForm} from 'react-hook-form';
+import {AppContext, AuthData, RootStackParamList} from '../../App';
 import GlobalButton from '../../components/GlobalButton';
 import GlobalTextInput from '../../components/TextInput';
 import {doLogin} from '../../services/loginAPI';
+import {useAuth} from '../../contexts/Auth';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
 const height = Dimensions.get('window').height;
 
-interface UserLoginProps {
-  email: string;
-  password: string;
-}
 
 const Login = ({navigation}: Props) => {
   // TODO
   // Melhoria:  Talvez usar useReducer() ?
   const [email, setEmail] = React.useState('');
   const [senha, setSenha] = React.useState('');
-  const [user, setUser] = React.useState<UserLoginProps>();
-  const myContext = useContext(AppContext);
+  const [user, setUser] = React.useState<AuthData>();
+
+  const {register, setValue, handleSubmit} = useForm();
+
+  const auth = useAuth();
+
+  const signIn = async () => {
+    await auth.signIn(user);
+  };
+
+  React.useEffect(() => {
+    register('email');
+    register('password');
+  }, [register]);
 
   React.useEffect(() => {
     if (email && senha) {
@@ -76,7 +86,7 @@ const Login = ({navigation}: Props) => {
             onTouch={async () => {
               const res = await doLogin(user);
               if (res === 'OK') {
-                navigation.navigate('Home');
+                signIn();
               }
             }}
           />
