@@ -19,6 +19,7 @@ import reactotron from 'reactotron-react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import ChangeLanguage from './ChangeLanguage';
 import Article from '../screens/Article';
+import Loading from '../components/Loading';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -36,11 +37,7 @@ const Routes = () => {
   reactotron.log('auth', authData);
 
   if (loading) {
-    return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
+    return <Loading />;
   }
 
   return (

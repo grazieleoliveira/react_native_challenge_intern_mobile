@@ -12,6 +12,7 @@ import {
 import reactotron from 'reactotron-react-native';
 import {RootStackParamList} from '../../App';
 import GlobalButton from '../../components/GlobalButton';
+import Loading from '../../components/Loading';
 import {useLang} from '../../contexts/Language';
 import {ArticlesDTO, ArticleDTO} from '../../dtos/article';
 import {getArticles} from '../../services/healthCareApi';
@@ -54,7 +55,7 @@ const Home = ({navigation}: Props) => {
             title="Ler Mais"
             colorText="#FFF"
             color="#0050F0"
-            onTouch={() => navigation.navigate('Article')}
+            onTouch={() => navigation.navigate('Article', item)}
             paddingVertical={8}
             fontSize={14}
           />
@@ -72,9 +73,7 @@ const Home = ({navigation}: Props) => {
           renderItem={renderItem}
         />
       ) : (
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size={64} color="#0050F0" />
-        </View>
+        <Loading/>
       )}
     </View>
   );
@@ -100,11 +99,6 @@ const styles = StyleSheet.create({
   },
   readMore: {
     marginLeft: 16,
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 
