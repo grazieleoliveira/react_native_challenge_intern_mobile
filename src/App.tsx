@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {AuthProvider} from './contexts/Auth';
+import {LangProvider} from './contexts/Language';
 import Routes from './routes';
 
 export type RootStackParamList = {
@@ -9,13 +10,6 @@ export type RootStackParamList = {
   Login: undefined;
   Home: undefined;
 };
-
-export interface AuthContextData {
-  authData?: AuthData;
-  loading: boolean;
-  signIn: (data?: AuthData) => Promise<void>;
-  signOut(): void;
-}
 
 export interface AuthData {
   nome?: string;
@@ -26,8 +20,9 @@ export interface AuthData {
 const App = () => {
   return (
     <AuthProvider>
-      {/* TODO: Usar contextAPI para acessar os dados do usuario na aplicacao. */}
-      <Routes />
+      <LangProvider>
+        <Routes />
+      </LangProvider>
     </AuthProvider>
   );
 };

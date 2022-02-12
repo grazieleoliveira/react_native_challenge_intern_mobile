@@ -7,6 +7,7 @@ import Login from '../screens/Login';
 import Home from '../screens/Home';
 import {
   ActivityIndicator,
+  Image,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -16,6 +17,7 @@ import {useAuth} from '../contexts/Auth';
 import {RootStackParamList} from '../App';
 import reactotron from 'reactotron-react-native';
 import {NavigationContainer} from '@react-navigation/native';
+import ChangeLanguage from './ChangeLanguage';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -90,6 +92,8 @@ const Routes = () => {
             options={({navigation}) => ({
               title: 'Home',
               headerTitleAlign: 'center',
+              headerLeft: () => <ChangeLanguage />,
+
               headerRight: () => (
                 <TouchableOpacity onPress={() => goSignOut(navigation)}>
                   <Text

@@ -131,13 +131,6 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontFamily: 'RedHatDisplay-Bold',
   },
-  userPic: {
-    width: 94,
-    height: 94,
-    borderColor: '#FFF',
-    borderWidth: 4,
-    borderRadius: 75,
-  },
   textInputContainer: {
     width: '100%',
     paddingHorizontal: 24,
