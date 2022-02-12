@@ -27,14 +27,10 @@ const Home = ({navigation}: Props) => {
     const articleArr = await getArticles();
     setArticles(articleArr.articles);
     setArticlesES(
-      articleArr.articles?.filter(
-        (item: ArticleDTO, index: number) => index % 2 === 0,
-      ),
+      articleArr.articles?.filter((item: ArticleDTO) => item.lang === 'es'),
     );
     setArticlesEN(
-      articleArr.articles?.filter(
-        (item: ArticleDTO, index: number) => index % 2 !== 0,
-      ),
+      articleArr.articles?.filter((item: ArticleDTO) => item.lang === 'en'),
     );
   };
 
@@ -45,9 +41,6 @@ const Home = ({navigation}: Props) => {
   }, [articles]);
 
   const renderItem: ListRenderItem<ArticleDTO> = ({item}) => {
-    if (item.lang !== lang) {
-      return null;
-    }
     return (
       <View style={styles.itemContainer}>
         <Text style={styles.itemTitle}>{item.title}</Text>
