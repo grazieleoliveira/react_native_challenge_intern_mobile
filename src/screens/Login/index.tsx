@@ -1,5 +1,5 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Dimensions,
   Image,
@@ -23,8 +23,7 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 const height = Dimensions.get('window').height;
 
 const Login = ({navigation}: Props) => {
-  // TODO
-  // Melhoria:  Talvez usar useReducer() ?
+  const [errorForbidden, setErrorForbidden] = useState(false);
 
   const {
     register,
@@ -46,6 +45,9 @@ const Login = ({navigation}: Props) => {
 
     if (res === 'OK') {
       await auth.signIn(newUser);
+    }
+    if (res === 'FORBIDDEN') {
+      setErrorForbidden(true);
     }
   };
 
@@ -94,6 +96,11 @@ const Login = ({navigation}: Props) => {
                 <Text style={styles.errorText}>
                   •{'  '}
                   {errors.email.message}
+                </Text>
+              )}
+              {errorForbidden && (
+                <Text style={styles.errorText}>
+                  Usuário ou senha incorretos
                 </Text>
               )}
             </>
