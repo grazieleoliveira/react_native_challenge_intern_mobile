@@ -12,8 +12,6 @@ const LOGGED_USER_KEY = 'logged_key';
 const saveUser = (users: any) => AsyncStorage.setItem(USER_KEY, users);
 
 export const readUser = async () => {
-  const item = await AsyncStorage.getItem(USER_KEY);
-  reactotron.log('item', item);
   return AsyncStorage.getItem(USER_KEY);
 };
 
@@ -43,8 +41,7 @@ export const doCreateUser = (user: any) =>
 const saveLoggedUser = (user: any) =>
   AsyncStorage.setItem(LOGGED_USER_KEY, user);
 
-export const removeLoggedUser = () =>
-  AsyncStorage.removeItem(LOGGED_USER_KEY);
+export const removeLoggedUser = () => AsyncStorage.removeItem(LOGGED_USER_KEY);
 
 export const doLogin = (user: any) =>
   new Promise(async resolve => {
@@ -58,6 +55,7 @@ export const doLogin = (user: any) =>
       (existentUser: {password: any}) =>
         user.password === existentUser.password,
     );
+    reactotron.log('match', userMatch);
     if (userMatch) {
       simulateRequest(SUCCESS_STATUS)(resolve);
       // adicionei essa função pra fazer a verificação no login
@@ -66,5 +64,3 @@ export const doLogin = (user: any) =>
       simulateRequest(FORBIDDEN_STATUS)(resolve);
     }
   });
-
-

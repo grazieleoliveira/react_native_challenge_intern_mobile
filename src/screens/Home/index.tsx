@@ -1,11 +1,9 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
 import {StatusBar, Text, TouchableOpacity, View} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import reactotron from 'reactotron-react-native';
 import {RootStackParamList} from '../../App';
 import {useAuth} from '../../contexts/Auth';
-import {removeLoggedUser} from '../../services/loginAPI';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 

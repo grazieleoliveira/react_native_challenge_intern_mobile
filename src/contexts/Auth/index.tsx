@@ -39,7 +39,7 @@ export const AuthProvider: React.FC = ({children}) => {
     //Set the data in the context, so the App can be notified
     //and send the user to the AuthStack
     setAuthData(_authData);
-    AsyncStorage.setItem('logged-key', JSON.stringify(_authData));
+    await AsyncStorage.setItem('logged-key', JSON.stringify(_authData));
   };
 
   const signOut = async () => {

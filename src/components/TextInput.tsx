@@ -1,10 +1,9 @@
 import React, {Dispatch, SetStateAction} from 'react';
-import {StyleSheet, Text, TextInput, TouchableOpacity} from 'react-native';
+import {StyleSheet, TextInput} from 'react-native';
 
 interface TextInputProps {
   placeholder: string;
   onChangeText: Dispatch<SetStateAction<string>>;
-  text: string;
   keyboardType?:
     | 'default'
     | 'number-pad'
@@ -16,7 +15,6 @@ interface TextInputProps {
 
 const GlobalTextInput = ({
   placeholder,
-  text,
   onChangeText,
   keyboardType = 'default',
 }: TextInputProps) => {
