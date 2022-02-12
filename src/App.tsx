@@ -2,6 +2,7 @@ import React from 'react';
 
 import {AuthProvider} from './contexts/Auth';
 import {LangProvider} from './contexts/Language';
+import {ArticleDTO} from './dtos/article';
 import Routes from './routes';
 
 export type RootStackParamList = {
@@ -9,7 +10,7 @@ export type RootStackParamList = {
   Register: undefined;
   Login: undefined;
   Home: undefined;
-  Article: undefined;
+  Article: ArticleDTO;
 };
 
 export interface AuthData {
