@@ -32,11 +32,10 @@ const Home = ({navigation}: Props) => {
   }, [articles]);
 
   const renderItem = ({item}) => {
-    reactotron.log(item);
-
     return (
-      <View style={{width: '100%'}}>
-        <Text style={{color: 'blue'}}>{item.title}</Text>
+      <View style={styles.itemContainer}>
+        <Text style={styles.itemTitle}>{item.title}</Text>
+        <Text style={styles.readMore}>Ler Mais</Text>
       </View>
     );
   };
@@ -57,6 +56,24 @@ const Home = ({navigation}: Props) => {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
+  },
+  itemContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    padding: 16,
+  },
+  itemTitle: {
+    fontFamily: 'Roboto-Medium',
+    width: '100%',
+    color: '#000',
+    flexShrink: 1,
+  },
+  readMore: {
+    fontFamily: 'Roboto-Medium',
+    color: '#141414',
+    marginLeft: 16,
   },
 });
 
