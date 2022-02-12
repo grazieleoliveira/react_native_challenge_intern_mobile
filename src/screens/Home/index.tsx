@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {FlatList, StatusBar, StyleSheet, Text, View} from 'react-native';
 import reactotron from 'reactotron-react-native';
 import {RootStackParamList} from '../../App';
+import GlobalButton from '../../components/GlobalButton';
 import {useLang} from '../../contexts/Language';
 import {getArticles} from '../../services/healthCareApi';
 
@@ -35,7 +36,16 @@ const Home = ({navigation}: Props) => {
     return (
       <View style={styles.itemContainer}>
         <Text style={styles.itemTitle}>{item.title}</Text>
-        <Text style={styles.readMore}>Ler Mais</Text>
+        <View style={styles.readMore}>
+          <GlobalButton
+            title="Ler Mais"
+            colorText="#FFF"
+            color="#0050F0"
+            onTouch={() => {}}
+            paddingVertical={8}
+            fontSize={14}
+          />
+        </View>
       </View>
     );
   };
@@ -61,6 +71,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     width: '100%',
     padding: 16,
   },
@@ -71,8 +82,6 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   readMore: {
-    fontFamily: 'Roboto-Medium',
-    color: '#141414',
     marginLeft: 16,
   },
 });
