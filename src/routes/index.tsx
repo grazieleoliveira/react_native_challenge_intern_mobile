@@ -18,12 +18,11 @@ import {RootStackParamList} from '../App';
 import reactotron from 'reactotron-react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import ChangeLanguage from './ChangeLanguage';
+import Article from '../screens/Article';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const Routes = () => {
-  // const [authData, setAuthData] = useState<AuthData | {}>({});
-  // const [loading, setLoading] = useState(true);
   const {authData, loading, signOut} = useAuth();
 
   const auth = useAuth();
@@ -86,34 +85,50 @@ const Routes = () => {
             />
           </>
         ) : (
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={({navigation}) => ({
-              title: 'Home',
-              headerTitleAlign: 'center',
-              headerLeft: () => <ChangeLanguage />,
+          <>
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={({navigation}) => ({
+                title: 'Home',
+                headerTitleAlign: 'center',
+                headerLeft: () => <ChangeLanguage />,
 
-              headerRight: () => (
-                <TouchableOpacity onPress={() => goSignOut(navigation)}>
-                  <Text
-                    style={{
-                      fontFamily: 'RedHatDisplay-Regular',
-                      color: '#FFF',
-                    }}>
-                    Logout
-                  </Text>
-                </TouchableOpacity>
-              ),
-              headerStyle: {
-                backgroundColor: '#0050F0',
-              },
-              headerTintColor: '#fff',
-              headerTitleStyle: {
-                fontFamily: 'RedHatDisplay-Bold',
-              },
-            })}
-          />
+                headerRight: () => (
+                  <TouchableOpacity onPress={() => goSignOut(navigation)}>
+                    <Text
+                      style={{
+                        fontFamily: 'RedHatDisplay-Regular',
+                        color: '#FFF',
+                      }}>
+                      Logout
+                    </Text>
+                  </TouchableOpacity>
+                ),
+                headerStyle: {
+                  backgroundColor: '#0050F0',
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                  fontFamily: 'RedHatDisplay-Bold',
+                },
+              })}
+            />
+            <Stack.Screen
+              name="Article"
+              component={Article}
+              options={{
+                title: 'Artigo',
+                headerStyle: {
+                  backgroundColor: '#0050F0',
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                  fontFamily: 'RedHatDisplay-Bold',
+                },
+              }}
+            />
+          </>
         )}
       </Stack.Navigator>
     </NavigationContainer>
