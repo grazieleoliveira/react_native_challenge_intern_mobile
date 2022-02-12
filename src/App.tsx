@@ -9,6 +9,7 @@ export type RootStackParamList = {
   Register: undefined;
   Login: undefined;
   Home: undefined;
+  Article: undefined;
 };
 
 export interface AuthData {

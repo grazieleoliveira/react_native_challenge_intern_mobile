@@ -1,10 +1,9 @@
 import React from 'react';
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
-import reactotron from 'reactotron-react-native';
 import {useLang} from '../contexts/Language';
 
 const ChangeLanguage = () => {
-  const {lang, changeLang} = useLang();
+  const {changeLang} = useLang();
 
 
   return (

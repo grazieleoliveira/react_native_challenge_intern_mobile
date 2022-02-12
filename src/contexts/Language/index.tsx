@@ -1,5 +1,4 @@
-import React, {createContext, useState, useContext, useEffect} from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, {createContext, useState, useContext} from 'react';
 
 export interface LangData {
   lang?: 'es' | 'en';
@@ -12,8 +11,6 @@ export const LangProvider: React.FC = ({children}) => {
   const [lang, setLang] = useState<'es' | 'en'>('en');
 
   const changeLang = (_lang: 'es' | 'en') => {
-    //Remove  from context, so the App can be notified
-    //and send the user to the AuthStack
     setLang(_lang);
   };
 
