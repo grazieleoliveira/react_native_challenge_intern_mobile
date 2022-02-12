@@ -1,15 +1,8 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import React, {useState} from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  useWindowDimensions,
-  View,
-} from 'react-native';
+import React from 'react';
+import {ScrollView, StyleSheet, Text, useWindowDimensions} from 'react-native';
 import {RootStackParamList} from '../../App';
 import RenderHtml, {defaultSystemFonts} from 'react-native-render-html';
-import reactotron from 'reactotron-react-native';
 
 const COLORS_BLUE = '#4040F1';
 const COLORS_DARK = '#3B3B3A';
@@ -33,12 +26,9 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Article'>;
 
 const Article = ({route}: Props) => {
   const {title, content} = route.params;
-  const [cleanContent, setCleanContent] = useState('');
   const {width} = useWindowDimensions();
 
   const systemFonts = [...defaultSystemFonts, 'Roboto-Regular', 'Roboto-Bold'];
-
-  reactotron.log(`CONT`, content);
 
   return (
     <ScrollView style={styles.container}>

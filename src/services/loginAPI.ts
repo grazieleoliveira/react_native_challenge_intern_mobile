@@ -1,7 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Dispatch, SetStateAction} from 'react';
-import reactotron from 'reactotron-react-native';
-import {AuthDataProps} from '../App';
+import AsyncStorage from '@react-native-async-storage/async-storage';;
 
 const TIMEOUT = 2500;
 const SUCCESS_STATUS = 'OK';
@@ -55,7 +52,6 @@ export const doLogin = (user: any) =>
       (existentUser: {password: any}) =>
         user.password === existentUser.password,
     );
-    reactotron.log('match', userMatch);
     if (userMatch) {
       simulateRequest(SUCCESS_STATUS)(resolve);
       // adicionei essa função pra fazer a verificação no login

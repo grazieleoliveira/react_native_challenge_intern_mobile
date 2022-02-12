@@ -9,13 +9,12 @@ import {
   View,
 } from 'react-native';
 import {FieldValues, SubmitHandler, useForm} from 'react-hook-form';
-import {AuthData, RootStackParamList} from '../../App';
+import {RootStackParamList} from '../../App';
 import GlobalButton from '../../components/GlobalButton';
 import GlobalTextInput from '../../components/TextInput';
 import {doLogin} from '../../services/loginAPI';
 import {useAuth} from '../../contexts/Auth';
 import {yupResolver} from '@hookform/resolvers/yup';
-import reactotron from 'reactotron-react-native';
 import {yupLoginValidationSchema} from '../../utils/schema';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
@@ -41,7 +40,6 @@ const Login = ({navigation}: Props) => {
     };
 
     const res = await doLogin(newUser);
-    reactotron.log(`res`, res);
 
     if (res === 'OK') {
       await auth.signIn(newUser);

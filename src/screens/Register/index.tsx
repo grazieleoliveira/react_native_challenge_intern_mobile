@@ -10,7 +10,6 @@ import {
   Text,
   View,
 } from 'react-native';
-import reactotron from 'reactotron-react-native';
 import {RootStackParamList} from '../../App';
 import GlobalButton from '../../components/GlobalButton';
 import GlobalTextInput from '../../components/TextInput';
@@ -48,7 +47,6 @@ const Register = ({navigation}: Props) => {
     }
   };
 
-  reactotron.log('ee', errors);
   return (
     <View style={styles.mainContainer}>
       <StatusBar barStyle="light-content" backgroundColor="#0050F0" />

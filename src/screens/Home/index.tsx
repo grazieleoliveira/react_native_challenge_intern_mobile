@@ -1,7 +1,6 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React, {useState} from 'react';
 import {
-  ActivityIndicator,
   FlatList,
   ListRenderItem,
   StatusBar,
@@ -9,7 +8,6 @@ import {
   Text,
   View,
 } from 'react-native';
-import reactotron from 'reactotron-react-native';
 import {RootStackParamList} from '../../App';
 import GlobalButton from '../../components/GlobalButton';
 import Loading from '../../components/Loading';
@@ -69,7 +67,11 @@ const Home = ({navigation}: Props) => {
 
   return (
     <View style={styles.mainContainer}>
-      <StatusBar barStyle="light-content" backgroundColor="#0050F0" />
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="#0050F0"
+        translucent
+      />
       {articles ? (
         <FlatList
           data={lang === 'en' ? articlesEN : articlesES}

@@ -5,17 +5,9 @@ import Onboard from '../screens/Onboard';
 import Register from '../screens/Register';
 import Login from '../screens/Login';
 import Home from '../screens/Home';
-import {
-  ActivityIndicator,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 import {useAuth} from '../contexts/Auth';
 import {RootStackParamList} from '../App';
-import reactotron from 'reactotron-react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import ChangeLanguage from './ChangeLanguage';
 import Article from '../screens/Article';
@@ -34,7 +26,6 @@ const Routes = () => {
       navigation.navigate('Onboard');
     }
   };
-  reactotron.log('auth', authData);
 
   if (loading) {
     return <Loading />;

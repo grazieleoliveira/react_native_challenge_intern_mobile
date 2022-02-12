@@ -1,5 +1,4 @@
 import axios from 'axios';
-import reactotron from 'reactotron-react-native';
 
 const uri = 'https://www.healthcare.gov/api/articles.json';
 
