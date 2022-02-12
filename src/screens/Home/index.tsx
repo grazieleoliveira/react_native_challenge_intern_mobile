@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {
   ActivityIndicator,
   FlatList,
+  ListRenderItem,
   StatusBar,
   StyleSheet,
   Text,
@@ -12,24 +13,29 @@ import reactotron from 'reactotron-react-native';
 import {RootStackParamList} from '../../App';
 import GlobalButton from '../../components/GlobalButton';
 import {useLang} from '../../contexts/Language';
+import {ArticlesDTO, ArticleDTO} from '../../dtos/article';
 import {getArticles} from '../../services/healthCareApi';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const Home = ({navigation}: Props) => {
-  const [articles, setArticles] = useState<any>();
-  const [articlesES, setArticlesES] = useState<any>();
-  const [articlesEN, setArticlesEN] = useState<any>();
+  const [articles, setArticles] = useState<ArticlesDTO>();
+  const [articlesES, setArticlesES] = useState<ArticlesDTO>();
+  const [articlesEN, setArticlesEN] = useState<ArticlesDTO>();
   const {lang} = useLang();
 
   const fetchData = async () => {
     const articleArr = await getArticles();
     setArticles(articleArr.articles);
     setArticlesES(
-      articleArr.articles?.filter((item, index: number) => index % 2 === 0),
+      articleArr.articles?.filter(
+        (item: ArticleDTO, index: number) => index % 2 === 0,
+      ),
     );
     setArticlesEN(
-      articleArr.articles?.filter((item, index: number) => index % 2 !== 0),
+      articleArr.articles?.filter(
+        (item: ArticleDTO, index: number) => index % 2 !== 0,
+      ),
     );
   };
 
@@ -39,7 +45,7 @@ const Home = ({navigation}: Props) => {
     }
   }, [articles]);
 
-  const renderItem = ({item}) => {
+  const renderItem: ListRenderItem<ArticleDTO> = ({item}) => {
     return (
       <View style={styles.itemContainer}>
         <Text style={styles.itemTitle}>{item.title}</Text>
@@ -48,7 +54,7 @@ const Home = ({navigation}: Props) => {
             title="Ler Mais"
             colorText="#FFF"
             color="#0050F0"
-            onTouch={() => {}}
+            onTouch={() => navigation.navigate('Article')}
             paddingVertical={8}
             fontSize={14}
           />
