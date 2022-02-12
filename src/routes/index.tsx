@@ -5,7 +5,13 @@ import Onboard from '../screens/Onboard';
 import Register from '../screens/Register';
 import Login from '../screens/Login';
 import Home from '../screens/Home';
-import {ActivityIndicator, View} from 'react-native';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {useAuth} from '../contexts/Auth';
 import {RootStackParamList} from '../App';
 import reactotron from 'reactotron-react-native';
@@ -16,8 +22,16 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const Routes = () => {
   // const [authData, setAuthData] = useState<AuthData | {}>({});
   // const [loading, setLoading] = useState(true);
-  const {authData, loading} = useAuth();
+  const {authData, loading, signOut} = useAuth();
 
+  const auth = useAuth();
+
+  const goSignOut = navigation => {
+    signOut();
+    if (!auth.authData) {
+      navigation.navigate('Onboard');
+    }
+  };
   reactotron.log('auth', authData);
 
   if (loading) {
@@ -73,9 +87,20 @@ const Routes = () => {
           <Stack.Screen
             name="Home"
             component={Home}
-            options={{
+            options={({navigation}) => ({
               title: 'Home',
               headerTitleAlign: 'center',
+              headerRight: () => (
+                <TouchableOpacity onPress={() => goSignOut(navigation)}>
+                  <Text
+                    style={{
+                      fontFamily: 'RedHatDisplay-Regular',
+                      color: '#FFF',
+                    }}>
+                    Logout
+                  </Text>
+                </TouchableOpacity>
+              ),
               headerStyle: {
                 backgroundColor: '#0050F0',
               },
@@ -83,7 +108,7 @@ const Routes = () => {
               headerTitleStyle: {
                 fontFamily: 'RedHatDisplay-Bold',
               },
-            }}
+            })}
           />
         )}
       </Stack.Navigator>

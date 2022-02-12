@@ -46,7 +46,6 @@ const Login = ({navigation}: Props) => {
 
     if (res === 'OK') {
       await auth.signIn(newUser);
-      navigation.navigate(`Login`);
     }
   };
 
