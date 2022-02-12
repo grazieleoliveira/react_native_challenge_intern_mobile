@@ -1,6 +1,13 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React, {useState} from 'react';
-import {FlatList, StatusBar, StyleSheet, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import reactotron from 'reactotron-react-native';
 import {RootStackParamList} from '../../App';
 import GlobalButton from '../../components/GlobalButton';
@@ -53,11 +60,15 @@ const Home = ({navigation}: Props) => {
   return (
     <View style={styles.mainContainer}>
       <StatusBar barStyle="light-content" backgroundColor="#0050F0" />
-      {articles && (
+      {articles ? (
         <FlatList
           data={lang === 'en' ? articlesEN : articlesES}
           renderItem={renderItem}
         />
+      ) : (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size={64} color="#0050F0" />
+        </View>
       )}
     </View>
   );
@@ -83,6 +94,11 @@ const styles = StyleSheet.create({
   },
   readMore: {
     marginLeft: 16,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
