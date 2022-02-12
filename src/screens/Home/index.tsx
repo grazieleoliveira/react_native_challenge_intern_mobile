@@ -47,6 +47,9 @@ const Home = ({navigation}: Props) => {
   }, [articles]);
 
   const renderItem: ListRenderItem<ArticleDTO> = ({item}) => {
+    if (item.lang !== lang) {
+      return null;
+    }
     return (
       <View style={styles.itemContainer}>
         <Text style={styles.itemTitle}>{item.title}</Text>
@@ -73,7 +76,7 @@ const Home = ({navigation}: Props) => {
           renderItem={renderItem}
         />
       ) : (
-        <Loading/>
+        <Loading />
       )}
     </View>
   );
@@ -94,7 +97,7 @@ const styles = StyleSheet.create({
   itemTitle: {
     fontFamily: 'Roboto-Medium',
     width: '100%',
-    color: '#000',
+    color: '#3b3a3a',
     flexShrink: 1,
   },
   readMore: {
