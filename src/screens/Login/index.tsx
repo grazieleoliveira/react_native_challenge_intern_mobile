@@ -26,7 +26,6 @@ const Login = ({navigation}: Props) => {
 
   const {
     handleSubmit,
-
     formState: {errors},
     control,
     reset,
@@ -138,10 +137,13 @@ const Login = ({navigation}: Props) => {
           <Text
             onPress={() => {
               navigation.navigate('Register');
-              reset({
-                email: '',
-                password: '',
-              });
+              reset(
+                {
+                  email: '',
+                  password: '',
+                },
+                {keepErrors: false},
+              );
             }}
             style={styles.boldText}>
             {' '}
