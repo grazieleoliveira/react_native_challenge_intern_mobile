@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useTogglePasswordVisibility} from '../hooks/passwordVisibility';
+import {useTogglePasswordVisibility} from '../hooks/PasswordVisibility';
 
 interface TextInputProps {
   placeholder: string;

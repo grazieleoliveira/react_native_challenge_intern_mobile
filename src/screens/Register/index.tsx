@@ -84,7 +84,11 @@ const Register = ({navigation}: Props) => {
           render={({field: {onChange, value}}) => (
             <GlobalTextInput
               placeholder="Digite sua senha"
-              onChangeText={onChange}
+              onChangeText={text =>
+                String(text).includes(' ')
+                  ? onChange(String(text).trim())
+                  : onChange(text)
+              }
               isPassword={true}
               value={value}
             />
