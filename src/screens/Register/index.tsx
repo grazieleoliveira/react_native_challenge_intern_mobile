@@ -36,7 +36,7 @@ const Register = ({navigation}: Props) => {
 
   const registerUser: SubmitHandler<FieldValues> = async data => {
     const newUser = {
-      nome: data.nome,
+      nome: data.nome.trim(),
       email: data.email,
       password: data.password,
     };
@@ -74,7 +74,11 @@ const Register = ({navigation}: Props) => {
           render={({field: {onChange, value}}) => (
             <GlobalTextInput
               placeholder="Digite seu e-mail"
-              onChangeText={onChange}
+              onChangeText={text =>
+                String(text).includes(' ')
+                  ? onChange(String(text).trim())
+                  : onChange(text)
+              }
               value={value}
             />
           )}

@@ -77,7 +77,11 @@ const Login = ({navigation}: Props) => {
           render={({field: {onChange, value}}) => (
             <GlobalTextInput
               placeholder="Digite seu e-mail"
-              onChangeText={onChange}
+              onChangeText={text =>
+                String(text).includes(' ')
+                  ? onChange(String(text).trim())
+                  : onChange(text)
+              }
               value={value}
             />
           )}
