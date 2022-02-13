@@ -11,6 +11,7 @@ import {
 import {RootStackParamList} from '../../App';
 import GlobalButton from '../../components/GlobalButton';
 import Loading from '../../components/Loading';
+import GlobalTextInput from '../../components/TextInput';
 import {useLang} from '../../contexts/Language';
 import {ArticlesDTO, ArticleDTO} from '../../dtos/article';
 import {getArticles} from '../../services/healthCareApi';
@@ -21,6 +22,7 @@ const Home = ({navigation}: Props) => {
   const [articles, setArticles] = useState<ArticlesDTO>();
   const [articlesES, setArticlesES] = useState<ArticlesDTO>();
   const [articlesEN, setArticlesEN] = useState<ArticlesDTO>();
+  const [search, setSearch] = useState('');
   const {lang} = useLang();
 
   const fetchData = async () => {
@@ -33,6 +35,34 @@ const Home = ({navigation}: Props) => {
       articleArr.articles?.filter((item: ArticleDTO) => item.lang === 'en'),
     );
   };
+
+  const filterArticle = (text: string, articleList?: ArticlesDTO) => {
+    return articleList?.filter(
+      (item: ArticleDTO) =>
+        item.title.toUpperCase().indexOf(text.toUpperCase()) > -1,
+    );
+  };
+
+  const searchFilter = (text: string) => {
+    if (text) {
+      const newText =
+        lang === 'en'
+          ? filterArticle(text, articlesEN)
+          : filterArticle(text, articlesES);
+      setArticles(newText);
+    } else {
+      setArticles(lang === 'en' ? articlesEN : articlesES);
+    }
+    setSearch(text);
+  };
+
+  React.useEffect(() => {
+    setArticles(
+      lang === 'en'
+        ? filterArticle(search, articlesEN)
+        : filterArticle(search, articlesES),
+    );
+  }, [search, lang, articlesEN, articlesES]);
 
   React.useEffect(() => {
     if (!articles) {
@@ -65,10 +95,24 @@ const Home = ({navigation}: Props) => {
         backgroundColor="#0050F0"
         translucent
       />
+      <View style={styles.textInput}>
+        <GlobalTextInput
+          value={search}
+          onChangeText={text => searchFilter(String(text))}
+          placeholder="Pesquisar"
+          borderColor="#858585b5"
+          inputColor="#3b3a3a"
+          placeholderColor="#5a5a5a55"
+          borderRadius={50}
+          borderWidth={2}
+          paddingVertical={8}
+        />
+      </View>
       {articles ? (
         <FlatList
-          data={lang === 'en' ? articlesEN : articlesES}
+          data={articles}
           renderItem={renderItem}
+          showsVerticalScrollIndicator={false}
         />
       ) : (
         <Loading />
@@ -94,6 +138,13 @@ const styles = StyleSheet.create({
     width: '100%',
     color: '#3b3a3a',
     flexShrink: 1,
+  },
+  textInput: {
+    paddingHorizontal: 8,
+    paddingTop: 12,
+    paddingBottom: 12,
+    borderBottomColor: '#7474747a',
+    borderBottomWidth: 1,
   },
   readMore: {
     marginLeft: 16,

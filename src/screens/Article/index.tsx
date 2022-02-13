@@ -48,7 +48,7 @@ const Article = ({route}: Props) => {
 const styles = StyleSheet.create({
   mainTitle: {
     fontFamily: 'Roboto-Bold',
-    fontSize: 20,
+    fontSize: 24,
     color: '#3b3a3a',
     alignSelf: 'center',
     textAlign: 'center',

@@ -20,6 +20,12 @@ interface TextInputProps {
     | 'phone-pad';
   isPassword?: boolean;
   value: string;
+  borderColor?: string;
+  inputColor?: string;
+  placeholderColor?: string;
+  borderRadius?: number;
+  borderWidth?: number;
+  paddingVertical?: number;
 }
 
 const GlobalTextInput = ({
@@ -28,20 +34,26 @@ const GlobalTextInput = ({
   keyboardType = 'default',
   isPassword = false,
   value,
+  borderColor = '#FFF',
+  inputColor = '#FFF',
+  placeholderColor = '#FFFFFF80',
+  borderRadius = 4,
+  borderWidth = 1,
+  paddingVertical = 14,
 }: TextInputProps) => {
   const {passwordVisibility, handlePasswordVisibility} =
     useTogglePasswordVisibility();
 
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, borderColor, borderRadius, borderWidth}}>
       <TextInput
-        style={styles.textInput}
+        style={{...styles.textInput, color: inputColor, paddingVertical}}
         onChangeText={onChangeText}
         keyboardType={keyboardType}
         placeholder={placeholder}
         textAlign="left"
         secureTextEntry={passwordVisibility && isPassword}
-        placeholderTextColor="#FFFFFF80"
+        placeholderTextColor={placeholderColor}
         value={value}
       />
       {isPassword && !passwordVisibility && (
@@ -67,9 +79,6 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: 4,
-    borderColor: '#FFF',
-    borderWidth: 1,
     paddingHorizontal: 10,
   },
   textInput: {
@@ -77,8 +86,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     fontFamily: 'Roboto-Bold',
     fontSize: 16,
-    paddingVertical: 14,
-    color: '#FFF',
   },
   iconTouchable: {
     width: '10%',
