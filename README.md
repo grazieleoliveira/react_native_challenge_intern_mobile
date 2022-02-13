@@ -1,113 +1,57 @@
 # Sanar Intern Challenge Mobile
-Este é um desafio que vai ajudar a identificar seus pontos fortes como uma pessoa desenvolvedora mobile na Sanar.
 
 <div align="center">
-  <img src="screenshot_initial_project_mobile.png" alt="Foto do Projeto Inicial" height="599" width="430"/>
+  <img src="https://media.giphy.com/media/FYV8Cv9glKHTFYxKT7/giphy.gif" alt="Foto do Projeto Inicial"/>
+  &emsp; &emsp; &emsp; &emsp;
+  <img src="https://media.giphy.com/media/x5V0G2B0o2AnlJumFA/giphy.gif" alt="Foto do Projeto Inicial"/>
 </div>
 
+<br>
+<div align="center">
+  This application is my solution of <strong>Sanar Intern Challenge Mobile</strong>
+</div>
+<br>
 
-`
-O objetivo desse desafio é construir um aplicativo utilizando a tecnologia React Native e com isso demonstrar suas habilidades técnicas e domínio do framework fazendo o uso dessa tecnologia.
-`
+## ⚔️ The challenge
 
-## Problema: ❓
+The challenge proposed the development of an app that let users read articles related to healthcare, using React Native.
+<br>
 
-As usuárias da sanar são super profissionais que desejam impactar e revolucionar a sáude do mundo, para isso será necessário que elas estudem bastante
-com os artigos mais renomados publicados na revista HealthCare, essa revista publica varios artigos e o recomendado é que as profissionais realizem uma leitura diária. Porém elas estão ocupadas em suas rotinas que podem ser dentro de salas de aulas, realizando a residência médica ou realizando atendimentos, com isso elas estão longe de seus escritórios ou local de estudos e não estão conseguindo se atualizar. Nossa super PO e lideranças estratégicas identificaram que um novo produto, sendo mais específico uma App pode resolver essa dor.
+What was requested:
+- Developing three mandatory screens: Onboard, Login and Register, as close as possible to the [prototype](https://www.figma.com/file/U67le6ZsSSb0XOgU4F7COC/Est%C3%A1gio-%2F-2022.1?node-id=2%3A274)
+- Get the articles from [HealthCare API](https://www.healthcare.gov/api/articles.json)
+- Developing user login workflow, using functions from the loginAPI file. It is important to note that there is no back-end service and AsyncStorage was used to store the data locally.
+- Use validation rules in the input fields
 
-## Solução 🚀
+You can check out the full description of this challenge at [this repository](https://github.com/jacksonsmith/react_native_challenge_intern_mobile).
 
-Criar um aplicativo que organize a leitura dos artigos da revista HealthCare.
+## 🚀 Additional functionalities
 
-## Instruções 📖
+Apart from the previously said functionalities, I also added some new things:
+- Search articles by language
+- User logout
+- Password visiblity button on inputs
 
-* Prefira realizar o seu próprio código do que utilizar bibliotecas ou componentes prontos.
-* Fazer o uso dos artigos da API: 'https://www.healthcare.gov/api/articles.json'.
-* Sua solução deve ter no mínimo 3 telas tela obrigátorios que estão disponíveis no nesse figma https://www.figma.com/file/U67le6ZsSSb0XOgU4F7COC/Est%C3%A1gio-%2F-2022.1?node-id=2%3A274 e ao menos mais 1 tela de livre escolha e no máximo 2 para organização dos artigos.
+## 📚 Libraries
 
-### Tecnologias
-* Precisamos que você faça essa etapa utilizando o framework do React Native.
+I chose to try not using a bunch of libraries, making it a simple as possible. Here are the ones I used in the project:
 
-### Telas A serem desenvolvidas
-1. Boas Vindas
-2. Login
-3. Registro
-4. Primeira tela de artigos (Bônus)
-5. Segunda tela de artigos  (Bônus)
+- React Navigation V6 → to configure navigation.
+- React Hook Form / Yup → for validating the application input fields.
+- React Native Render HTML → as the name says, it was used to render html strings that came from the API. I chose using this library instead of React Native WebView so as to get a cleaner code, without those ugly JavaScript injections. 
 
-#### Regras de validação do campo de senha 🔑
-1. Pelo menos 1 caractere maiúsculo.
-2. Pelo menos 1 caractere minúsculo.
-3. Pelo menos 1 dígito.
-4. Pelo menos 1 caractere especial.
-5. Mínimo de 8 caracteres.
+## 🏃 Running the application
+### Clone the repository
+  ```
+  git clone https://github.com/grazieleoliveira/react_native_challenge_intern_mobile.git
+  ```
+### Install the dependencies
+ ```
+  yarn install
+ ```
+### Start Metro and run your Android emulator
+  ```
+  npx react-native start
+  npx react-native run-android
+  ```
 
-#### Regras de validação do campo do email 📧
-1. @ simbolo.
-2. Nome do domínio (Ex: sanar.com).
-3. Nome do receptor (Ex: developer).
-4. Digitos de 0 até 9
-5. apenas os caracteres especiais: Ponto (.), Underline (_), Hífen (-) e Mais (+).
-
-### Recomendações 🌈
-* Você deve usar os métodos do arquivo loginAPI para criar uma nova usuária ⭐️
-* Você deve usar os métodos do arquivo loginAPI para realizar a autenticação do login ⭐️
-* Você deve usar a API da HealthCare do governo dos USA como nossa provedora de artigos https://www.healthcare.gov/api/articles.json ⭐️
-* Faça o uso de bibliotecas como Axios ou Fetch para requisições http ⭐️
-* Codem pensando na melhor experiência da usuária ♥️
-
-## Entrega 📦
-
-* Criar uma conta no GitHub e fazer um fork desse projeto 1️⃣
-* Commitar o código fonte 2️⃣
-* Dar acesso as pessoas: @csmonteiro @jacksonsmith, @hellintonklein, @RaiVolt. Para realizare a revisão de código 3️⃣
-
-## Dependências 🏬
-
-* Node v16.11.1 (recomendo instalar via [NVM](https://github.com/creationix/nvm))
-* [React Native Cli](https://www.npmjs.com/package/react-native-cli)
-* [NPM](https://www.npmjs.com/)
-* [Yarn](https://yarnpkg.com)  (Opcional apenas se não quiser utilizar o NPM)
-* [Cocoa Pods - Apenas iOS](https://cocoapods.org/)
-
-
-#### Instalar dependências 🏗
-
-Em um terminal:
-
-```bash
-Android
-npm install # instalar dependências
-npm run android # iniciar o metro bundler + abrir simulador android
-
-iOS
-npm install # instalar dependências
-cd ios && npx pod-install
-npm run ios # iniciar o metro bundler + abrir simulador iOS
-npm test # executar testes unitários
-```
-
-Ou...
-
-
-```bash
-Android
-yarn # instalar dependências
-yarn android # iniciar o metro bundler + abrir simulador android
-
-iOS
-yarn # instalar dependências
-cd ios && npx pod-install
-yarn ios # iniciar o metro bundler + abrir simulador iOS
-yarn test # executar testes unitários
-```
-
-## Dicas ⌨️
-
-* Um código bem organizado e seguindo algum padrão de projeto é sempre bem vindo
-* A capacidade de criar interfaces utilizando boas praticas é sempre um diferencial interessante
-* Fique a vontade para inovar ou mostrar as coisas que você mais goste
-* Se divirta
-* Qualquer problema entre em contato com a gente.
-
-## Boa Sorte! 🍀🍀🍀🍀
