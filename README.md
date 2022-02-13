@@ -1,8 +1,8 @@
 # Sanar Intern Challenge Mobile
 
 <div align="center">
-  <img src="https://media.giphy.com/media/FYV8Cv9glKHTFYxKT7/giphy.gif" alt="Login Flow Gif" />
-  <img src="https://media.giphy.com/media/x5V0G2B0o2AnlJumFA/giphy.gif" alt="Article Gif"/>
+  <img src="https://media.giphy.com/media/lODEHyfhLDzVcocD33/giphy.gif" alt="Login Flow Gif" />
+  <img src="https://media.giphy.com/media/ybRlHMwOZE5BbUsvCb/giphy.gif" alt="Article Gif"/>
 </div>
 
 <br>
@@ -30,6 +30,7 @@ You can check out the full description of this challenge at [this repository](ht
 Apart from the previously said functionalities, I also added some new things:
 
 - Search articles by language
+- Search articles by text
 - User logout
 - Password visiblity button on inputs
 
