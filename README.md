@@ -14,7 +14,7 @@
 
 ## ⚔️ The challenge
 
-Developing an app that let users read articles related to healthcare, using React Native.
+Develop an app that let users read articles related to healthcare, using React Native.
 <br>
 
 What was requested:
