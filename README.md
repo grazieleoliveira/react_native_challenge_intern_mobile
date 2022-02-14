@@ -38,8 +38,9 @@ Apart from the previously said functionalities, I also added some new things:
 
 I chose to try not using a bunch of libraries, making it a simple as possible. Here are the ones I used in the project:
 
-- React Navigation V6 → to configure navigation.
-- React Hook Form / Yup → for validating the application input fields.
+- Axios → for the http requests.
+- React Navigation V6 → to configure navigation between screens.
+- React Hook Form / Yup → to create and validate forms.
 - React Native Render HTML → as the name says, it was used to render html strings that came from the API. I chose using this library instead of React Native WebView so as to get a cleaner code, without those ugly JavaScript injections.
 
 ## 🏃 Running the application
