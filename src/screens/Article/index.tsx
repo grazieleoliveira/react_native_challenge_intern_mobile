@@ -3,6 +3,7 @@ import React from 'react';
 import {ScrollView, StyleSheet, Text, useWindowDimensions} from 'react-native';
 import {RootStackParamList} from '../../App';
 import RenderHtml, {defaultSystemFonts} from 'react-native-render-html';
+import {formatDate} from '../../utils/date';
 
 const COLORS_BLUE = '#4040F1';
 const COLORS_DARK = '#3B3B3A';
@@ -25,7 +26,7 @@ const stylizationObj = {
 type Props = NativeStackScreenProps<RootStackParamList, 'Article'>;
 
 const Article = ({route}: Props) => {
-  const {title, content} = route.params;
+  const {title, content, date} = route.params;
   const {width} = useWindowDimensions();
 
   const systemFonts = [...defaultSystemFonts, 'Roboto-Regular', 'Roboto-Bold'];
@@ -33,6 +34,9 @@ const Article = ({route}: Props) => {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.mainTitle}>{title}</Text>
+      {!date.startsWith('0') && (
+        <Text style={styles.date}>{formatDate(date)}</Text>
+      )}
       <RenderHtml
         ignoredDomTags={['span']}
         contentWidth={width}
@@ -54,6 +58,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 24,
     marginBottom: 0,
+  },
+  date: {
+    alignSelf: 'center',
+    marginTop: 4,
+    color: '#414545',
   },
   container: {
     width: '100%',

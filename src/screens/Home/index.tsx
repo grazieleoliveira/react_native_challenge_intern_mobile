@@ -15,6 +15,7 @@ import GlobalTextInput from '../../components/TextInput';
 import {useLang} from '../../contexts/Language';
 import {ArticlesDTO, ArticleDTO} from '../../dtos/article';
 import {getArticles} from '../../services/healthCareApi';
+import { formatDate } from '../../utils/date';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
@@ -27,6 +28,7 @@ const Home = ({navigation}: Props) => {
 
   const fetchData = async () => {
     const articleArr = await getArticles();
+
     setArticles(articleArr.articles);
     setArticlesES(
       articleArr.articles?.filter((item: ArticleDTO) => item.lang === 'es'),
@@ -73,7 +75,15 @@ const Home = ({navigation}: Props) => {
   const renderItem: ListRenderItem<ArticleDTO> = ({item}) => {
     return (
       <View style={styles.itemContainer}>
-        <Text style={styles.itemTitle}>{item.title}</Text>
+        <View style={styles.columnContainer}>
+          <Text style={styles.itemTitle}>{item.title}</Text>
+          {/* É preciso fazer uma verificação pois algumas das datas vem quebradas */}
+          {!item.date.startsWith('0') && (
+            <Text style={styles.itemDate}>
+              Publicado em {formatDate(item.date)}
+            </Text>
+          )}
+        </View>
         <View style={styles.readMore}>
           <GlobalButton
             title="Ler Mais"
@@ -133,11 +143,17 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 16,
   },
+  columnContainer: {
+    flex: 1,
+  },
   itemTitle: {
     fontFamily: 'Roboto-Medium',
     width: '100%',
     color: '#3b3a3a',
     flexShrink: 1,
+  },
+  itemDate: {
+    fontSize: 12,
   },
   textInput: {
     paddingHorizontal: 8,
