@@ -1,6 +1,14 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
-import {ScrollView, StyleSheet, Text, useWindowDimensions} from 'react-native';
+import {
+  Image,
+  Linking,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  useWindowDimensions,
+} from 'react-native';
 import {RootStackParamList} from '../../App';
 import RenderHtml, {defaultSystemFonts} from 'react-native-render-html';
 import {formatDate} from '../../utils/date';
@@ -23,11 +31,29 @@ const stylizationObj = {
   },
 };
 
+const BASE_URL = 'https://www.healthcare.gov';
+
 type Props = NativeStackScreenProps<RootStackParamList, 'Article'>;
 
-const Article = ({route}: Props) => {
-  const {title, content, date} = route.params;
+const Article = ({route, navigation}: Props) => {
+  const {title, content, date, url} = route.params;
   const {width} = useWindowDimensions();
+
+  React.useLayoutEffect(() => {
+    if (url) {
+      navigation.setOptions({
+        headerRight: () => (
+          <TouchableOpacity
+            onPress={() => Linking.openURL(`${BASE_URL}${url}`)}>
+            <Image
+              style={styles.externalLink}
+              source={require('../../assets/images/exit-top-right.png')}
+            />
+          </TouchableOpacity>
+        ),
+      });
+    }
+  }, [url, navigation]);
 
   const systemFonts = [...defaultSystemFonts, 'Roboto-Regular', 'Roboto-Bold'];
 
@@ -66,6 +92,11 @@ const styles = StyleSheet.create({
   },
   container: {
     width: '100%',
+  },
+  externalLink: {
+    width: 24,
+    height: 24,
+    tintColor: '#FFF',
   },
 });
 
